@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, makeStyles } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
+import { Link, useLocation } from 'react-router-dom';
+import { Styles } from "../styles/styles";
 
 const useStyles = makeStyles({
   container: {
@@ -17,19 +19,19 @@ const useStyles = makeStyles({
     color: '#FFFFFF',
     '&:hover': {
       backgroundColor: '#f24a4f',
-    }
+    },
   },
   messageContainer: {
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   message: {
-      color: '#908E8E',
-      fontSize: '14px',
-      letterSpacing: '-0.1px',
-      lineHeight: '21px',
-      textAlign: 'center',
+    color: '#908E8E',
+    fontSize: '14px',
+    letterSpacing: '-0.1px',
+    lineHeight: '21px',
+    textAlign: 'center',
   },
   circle: {
     backgroundColor: '#C6D8D3',
@@ -38,26 +40,37 @@ const useStyles = makeStyles({
     height: '73px',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   checkIcon: {
     color: 'white',
-  }
+  },
 });
 
-
 function Home() {
-
+  const location = useLocation();
   const classes = useStyles();
+  const styles = Styles();
 
   return (
     <div className={classes.container}>
       <div className={classes.messageContainer}>
-        <div className={classes.circle}><CheckIcon className={classes.checkIcon} /></div>
-        <h1>Thank you!</h1>
-        <p className={classes.message}>We sent an email to catherine.shaw@gmail.com <br></br>
-          Click confirmation link in the email to verify your account</p>
-        <Button className={classes.submit}>Open Email App & Confirm</Button>
+        {location.state && (
+          <>
+            <div className={classes.circle}>
+              <CheckIcon className={classes.checkIcon} />
+            </div>
+            <h1>Thank you!</h1>
+            <p className={classes.message}>
+              We sent an email to {location.state.email} <br></br>
+              Click confirmation link in the email to verify your account
+            </p>
+            <Button className={classes.submit}>Open Email App & Confirm</Button>
+          </>
+        )}
+        {!location.state && <Link to="/login">
+            <Button className={styles.button}>Login</Button>
+          </Link>}
       </div>
     </div>
   );

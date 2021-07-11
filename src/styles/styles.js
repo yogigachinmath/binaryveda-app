@@ -41,4 +41,16 @@ export const Styles = makeStyles({
       backgroundColor: '#f24a4f',
     }
   },
+  button: {
+    width: '116px',
+    height: '44px',
+    color:  '#908E8E',
+    fontSize: '14px',
+    letterSpacing: '-0.1px',
+    lineHeight: '21px',
+    textAlign: 'center',
+    '&:hover': {
+      backgroundColor: '#f7f6f6',
+    },
+  },
 })

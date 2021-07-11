@@ -3,7 +3,6 @@ import { Snackbar } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 function AlertBar({ errorMessage }) {
-  console.log("inside alertbar");
   const [snackbar, setSnackbar] = useState({
     open: false,
     vertical: 'top',
@@ -16,9 +15,12 @@ function AlertBar({ errorMessage }) {
 
   useEffect(() => {
     setSnackbar((snackbar) => { return { ...snackbar, open: true } });
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       handleClose();
     }, 3000);
+    return () => {
+      clearTimeout(timer);
+    }
   }, [errorMessage, handleClose, setSnackbar]);
 
 

@@ -96,7 +96,10 @@ function Login() {
         throw new Error(message);
       }
       else {
-        history.push('/');
+        history.push({
+          pathname: '/',
+          state: { email }
+        });
       }
     } catch (err) {
       setErrorMessage([err.message]);
